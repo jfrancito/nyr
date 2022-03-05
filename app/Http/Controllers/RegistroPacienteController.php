@@ -288,7 +288,7 @@ class RegistroPacienteController extends Controller
 		$funcion 				= 	$this;
 		$fin					= 	$this->fin;
 		$listacontroles 		= 	Control::where('fecha','=',$fin)
-									//->where('doctor_id','=',$doctor_id)//falta
+									->where('doctor_id','=',Session::get('usuario')->id)
 									->orderby('codigo','asc')
 									->get();
 
@@ -309,9 +309,8 @@ class RegistroPacienteController extends Controller
 		$idopcion 				= 	$request['idopcion'];
 		
 
-
 		$listacontroles 		= 	Control::where('fecha','=',$fecha)
-									//->where('doctor_id','=',$doctor_id)//falta
+									->where('doctor_id','=',Session::get('usuario')->id)
 									->orderby('codigo','asc')
 									->get();
 		$funcion 				= 	$this;
