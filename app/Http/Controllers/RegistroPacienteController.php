@@ -287,11 +287,12 @@ class RegistroPacienteController extends Controller
 	    View::share('titulo','Lista Pacientes por atender');
 		$funcion 				= 	$this;
 		$fin					= 	$this->fin;
+
 		$listacontroles 		= 	Control::where('fecha','=',$fin)
 									->where('doctor_id','=',Session::get('usuario')->id)
+									->orderby('fecha_control','desc')
 									->orderby('codigo','asc')
 									->get();
-
 
 
 		return View::make('atenderpaciente/listapacienteatender',
@@ -311,6 +312,7 @@ class RegistroPacienteController extends Controller
 
 		$listacontroles 		= 	Control::where('fecha','=',$fecha)
 									->where('doctor_id','=',Session::get('usuario')->id)
+									->orderby('fecha_control','desc')
 									->orderby('codigo','asc')
 									->get();
 		$funcion 				= 	$this;
