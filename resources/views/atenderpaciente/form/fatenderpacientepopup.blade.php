@@ -1,77 +1,65 @@
 
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>DNI :</b></h5>
-    <p>{{$paciente->dni}}</p>
+    <h5><b>DNI : </b>{{$paciente->dni}}</h5>
   </div>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Nombre :</b></h5>
-    <p>{{$paciente->nombres}}</p>
+    <h5><b>Nombre : </b> {{$paciente->nombres}}</h5>
   </div>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Apellido paterno :</b></h5>
-    <p>{{$paciente->apellido_paterno}}</p>
+    <h5><b>Apellido paterno : </b> {{$paciente->apellido_paterno}}</h5>
   </div>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Apellido materno :</b></h5>
-    <p>{{$paciente->apellido_materno}}</p>
+    <h5><b>Apellido materno : </b> {{$paciente->apellido_materno}}</h5>
   </div>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Sexo :</b></h5>
-    <p>{{$funcion->rp_sexo_paciente($paciente->sexo)}}</p>
+    <h5><b>Sexo : </b> {{$funcion->rp_sexo_paciente($paciente->sexo)}}</h5>
   </div>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Fecha Nacimiento :</b></h5>
-    <p>{{date_format(date_create($paciente->fecha_nacimiento), 'd-m-Y')}}</p>
+    <h5><b>Fecha Nacimiento : </b> {{date_format(date_create($paciente->fecha_nacimiento), 'd-m-Y')}}</h5>
   </div>
 </div>
 
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Edad :</b></h5>
-    <p>{{$edad}} años</p>
+    <h5><b>Edad : </b> {{$edad}} años</h5>
   </div>
 </div>
 
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Telefono :</b></h5>
-    <p>{{$paciente->telefono}}</p>
+    <h5><b>Telefono : </b> {{$paciente->telefono}}</h5>
   </div>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Doctor :</b></h5>
-    <p>{{$control->user->nombre}}</p>
+    <h5><b>Doctor : </b> {{$control->user->nombre}}</h5>
   </div>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Tipo de cita :</b></h5>
-    <p>{{$funcion->rp_tipo_cita($control->control_resultado)}}</p>
+    <h5><b>Tipo de cita : </b> {{$funcion->rp_tipo_cita($control->control_resultado)}}</h5>
   </div>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Fecha {{$funcion->rp_tipo_cita($control->control_resultado)}} :</b></h5>
-    <p>{{date_format(date_create($control->fecha), 'd-m-Y')}}</p>
+    <h5><b>Fecha {{$funcion->rp_tipo_cita($control->control_resultado)}} : </b> {{date_format(date_create($control->fecha), 'd-m-Y')}}</h5>
   </div>
 </div>
 
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <div id="home4" class="tab-pane active cont">
-    <h5><b>Dirección :</b></h5>
-    <p>{{$paciente->direccion}}</p>
+    <h5><b>Dirección : </b> {{$paciente->direccion}}</h5>
   </div>
 </div>
 

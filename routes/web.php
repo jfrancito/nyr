@@ -55,6 +55,10 @@ Route::group(['middleware' => ['authaw']], function () {
 	Route::any('/atender-paciente/{idopcion}/{idcontrol}', 'RegistroPacienteController@actionAtenderPaciente');
 	Route::any('/ajax-asignar-cie-control', 'RegistroPacienteController@actionAjaxAsignarCieControl');
 	Route::any('/ajax-eliminar-cie-control', 'RegistroPacienteController@actionAjaxEliminarCieControl');
+	Route::any('/ajax-eliminar-doc-control', 'RegistroPacienteController@actionAjaxEliminarDocControl');
+
+
+
 
 	Route::any('/pop-up-detalle-control/{idcontrol}', 'RegistroPacienteController@actionPopUpDetalleControl');
 	Route::any('/pdf-detalle-control/{idcontrol}', 'RegistroPacienteController@actionPdfDetalleControl');

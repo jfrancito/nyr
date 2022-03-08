@@ -41,7 +41,11 @@
                   </div>
 
                         <div class='formajax'>
-                          @include('atenderpaciente.form.fatenderpaciente')
+                          @if($control->activo == 1)
+                            @include('atenderpaciente.form.fatenderpaciente')
+                          @else
+                            <p>Seleccione un control</p>
+                          @endif
                         </div>
 
                 </div>

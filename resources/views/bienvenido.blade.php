@@ -6,8 +6,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/datetimepicker/css/bootstrap-datetimepicker.min.css') }}" />
 @stop
 
-@section('section')
 
+@section('section')
+  <div class="be-content contenido bienvenidocontenedor" style="height: 100vh;">
+    <div class="main-content container-fluid">
+    </div>
+  </div>
 
 @stop 
 

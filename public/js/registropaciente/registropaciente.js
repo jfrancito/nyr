@@ -109,7 +109,6 @@ $(document).ready(function(){
 
         var _token          =   $('#token').val();
         //validacioones
-        if(codigocie ==''){ alerterrorajax("Ingrese un codigo cie."); return false;}
         if(descripcion ==''){ alerterrorajax("Ingrese un diagnostico."); return false;}
 
         data            =   {
@@ -141,6 +140,25 @@ $(document).ready(function(){
         ajax_normal_section(data,"/ajax-eliminar-cie-control",'listajax_detalle');
 
     });
+
+
+    $(".atenderpaciente").on('click','.eliminardoc', function() {
+
+        event.preventDefault();
+        var detalle_control_id =   $(this).attr('data_detalle_id');
+        var control_id      =   $('#control_id').val();
+        var _token          =   $('#token').val();
+
+        data            =   {
+                                _token      : _token,
+                                detalle_control_id   : detalle_control_id,
+                                control_id   : control_id,
+                            };
+        ajax_normal_section(data,"/ajax-eliminar-doc-control",'listajax_detalle_doc');
+
+    });
+
+
 
 
 

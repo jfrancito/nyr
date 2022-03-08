@@ -255,9 +255,9 @@ enctype="multipart/form-data"
         <input  type="text"
                 id="codigocie" name='codigocie' 
                 value=""
-
                 placeholder="CIE 10"
-                autocomplete="off" class="form-control input-sm w-200"/>
+                autocomplete="off" 
+                class="form-control input-sm w-200"/>
 
         <span class="input-group-addon">DIAGNOSTICO</span>
         <input  type="text"
@@ -302,6 +302,30 @@ enctype="multipart/form-data"
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="form-group" style="padding-top: 0px;">
+    <label class="col-sm-12 control-label" style="text-align: left;"><b>RESULTADO : </b></label>
+    <div class="col-sm-12">
+
+        <textarea 
+        name="resultado"
+        id = "resultado"
+        class="form-control input-sm"
+        rows="5" 
+        cols="50"
+        data-aw="9">{{$control->resultado}}</textarea>
+
+        @include('error.erroresvalidate', [ 'id' => $errors->has('resultado')  , 
+                                            'error' => $errors->first('resultado', ':message') , 
+                                            'data' => '9'])
+
+    </div>
+    </div>
+
+</div>
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <div class="form-group">
     <label class="col-sm-12 control-label" style="text-align: left;"><b>DOCUMENTOS : </b></label>
     <div class="col-md-12">
@@ -311,10 +335,36 @@ enctype="multipart/form-data"
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class=''>
+  <div class='listajax_detalle_doc'>
     @include('atenderpaciente.ajax.alistadocumentos')
   </div>
 </div>
+
+
+
+
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+    <div class="form-group" style="padding-top: 0px;" >
+
+      <label class="col-sm-12 control-label" style="text-align: left;">ESTADO </label>
+      <div class="col-sm-12">
+        {!! Form::select( 'estado'
+                          , $comboestado
+                          , $control->estado
+                          ,[
+                            'class'       => 'select2 form-control control input-xs' ,
+                            'id'          => 'estado',
+                            'required'    => '',
+                            'data-aw'     => '9'
+                          ]) !!}
+
+
+      </div>
+    </div>
+
+</div>
+
 
 <div class="row xs-pt-15">
   <div class="col-xs-6">

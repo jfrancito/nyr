@@ -43,7 +43,7 @@ class RegistroPacienteController extends Controller
 		$funcion 				= 	$this;
 		$fin					= 	$this->fin;
 
-		$listacontroles 		= 	Control::where('fecha','=',$fin)->orderby('codigo','asc')->get();
+		$listacontroles 		= 	Control::where('fecha','=',$fin)->orderby('orden','asc')->where('activo','=',1)->get();
 	    $combo_sexo  			= 	$this->rp_generacion_combo_sexo('Seleccione sexo');
 	    $combo_doctores  		= 	$this->rp_generacion_combo_doctores('Seleccione doctor','');
 	    $combo_tipo_cita  		= 	$this->rp_generacion_combo_resultado_control('Tipo de cita');
@@ -121,7 +121,7 @@ class RegistroPacienteController extends Controller
 
 
 		$fecha 					= 	$request['fecha'];
-		$listacontroles 		= 	Control::where('fecha','=',$fecha)->orderby('codigo','asc')->get();
+		$listacontroles 		= 	Control::where('fecha','=',$fecha)->orderby('orden','asc')->where('activo','=',1)->get();
 		$funcion 				= 	$this;
 
 		return View::make('registrocliente/ajax/alistaatencionpaciente',
@@ -228,6 +228,9 @@ class RegistroPacienteController extends Controller
 
 			}
 
+				$orden = Control::where('fecha','=',$this->fecha_sin_hora)->count();
+				$orden = $orden + 1;
+
 
 				if($control_resultado == '2'){
 
@@ -240,6 +243,7 @@ class RegistroPacienteController extends Controller
 					$control->fecha_resultado = $this->fecha_sin_hora;
 					$control->control_resultado = $control_resultado;
 					$control->ind_atendido = 0;
+					$control->orden = $orden;
 					$control->save();
 
 				}else{
@@ -253,6 +257,7 @@ class RegistroPacienteController extends Controller
 					$control->plan_trabajo = '';
 					$control->tratamiento = '';
 					$control->temperatura = '';
+					$control->resultado = '';
 					$control->pa = '';
 					$control->fr = '';
 					$control->fc = '';
@@ -266,6 +271,7 @@ class RegistroPacienteController extends Controller
 					$control->paciente_id = $idpaciente;
 					$control->fecha_crea = $this->fechaactual;
 					$control->usuario_crea = Session::get('usuario')->id;
+					$control->orden = $orden;
 					$control->save();
 				}
 
@@ -290,8 +296,9 @@ class RegistroPacienteController extends Controller
 
 		$listacontroles 		= 	Control::where('fecha','=',$fin)
 									->where('doctor_id','=',Session::get('usuario')->id)
-									->orderby('fecha_control','desc')
-									->orderby('codigo','asc')
+									->where('activo','=',1)
+									//->orderby('fecha_control','desc')
+									->orderby('orden','asc')
 									->get();
 
 
@@ -312,8 +319,9 @@ class RegistroPacienteController extends Controller
 
 		$listacontroles 		= 	Control::where('fecha','=',$fecha)
 									->where('doctor_id','=',Session::get('usuario')->id)
-									->orderby('fecha_control','desc')
-									->orderby('codigo','asc')
+									->where('activo','=',1)
+									//->orderby('fecha_control','desc')
+									->orderby('orden','asc')
 									->get();
 		$funcion 				= 	$this;
 
@@ -344,10 +352,13 @@ class RegistroPacienteController extends Controller
 			$plan_trabajo 		= 	$request['plan_trabajo'];
 
 			$tratamiento 		= 	$request['tratamiento'];
+			$resultado 			= 	$request['resultado'];
 			$temperatura 		= 	$request['temperatura'];
 			$pa  				= 	$request['pa'];
 			$fr 				= 	$request['fr'];
 			$fc  				= 	$request['fc'];
+			$estado  			= 	$request['estado'];
+
 
 			$files 				= 	$request['files'];
 
@@ -387,12 +398,14 @@ class RegistroPacienteController extends Controller
 			$control->plan_trabajo = $plan_trabajo;
 			$control->tratamiento = $tratamiento;
 			$control->temperatura = $temperatura;
+			$control->resultado = $resultado;
 			$control->pa = $pa;
 			$control->fr = $fr;
 			$control->fc = $fc;
 			$control->ind_atendido = 1;
 			$control->fecha_mod = $this->fechaactual;
 			$control->usuario_mod = Session::get('usuario')->id;
+			$control->activo = $estado;
 			$control->save();
 
 			return Redirect::to('/atender-paciente/'.$idopcion.'/'.$idcontrolenc)->with('bienhecho', 'Peciente ' . $paciente->nombres . ' se atendio');
@@ -406,6 +419,7 @@ class RegistroPacienteController extends Controller
 
 			$control 				= 	Control::where('id','=',$idcontrol)->first();
 			$listacontroles 		= 	Control::where('paciente_id','=',$control->paciente_id)
+										->where('activo','=',1)
 										->orderby('fecha','desc')->get();
 
 			$paciente 				= 	Paciente::where('id','=',$control->paciente_id)->first();
@@ -418,6 +432,8 @@ class RegistroPacienteController extends Controller
 			$listadetalledoc 		= 	DetalleControl::where('control_id','=',$control->id)
 										->where('tipo','=','DOC')->where('activo','=','1')->get();
 
+			$comboestado  			= 	array('1' => 'ACTIVO', '0' => 'ELIMINAR');
+
 			return View::make('atenderpaciente/pacienteatender',
 							 [				 	
 							 	'idopcion' 				=> $idopcion,
@@ -428,6 +444,7 @@ class RegistroPacienteController extends Controller
 							 	'listadetalledoc' 		=> $listadetalledoc,
 							 	'control' 				=> $control,
 							 	'paciente' 				=> $paciente,
+							 	'comboestado' 			=> $comboestado,
 							 	'edad' 					=> $edad,			 	
 							 ]);
 
@@ -483,7 +500,7 @@ class RegistroPacienteController extends Controller
 		$control->id = $idcontrol;
 
 		$control->codigocie = $codigocie;
-		$control->descripcion = $descripcion;
+		$control->descripcion = strtoupper($descripcion);
 		$control->tipo = 'CIE';
 		$control->control_id = $control_id;
 		$control->fecha_crea = $this->fechaactual;
@@ -523,6 +540,30 @@ class RegistroPacienteController extends Controller
 
 
 	}
+	public function actionAjaxEliminarDocControl(Request $request) {
+
+		$detalle_control_id 	= 	$request['detalle_control_id'];
+		$control_id 			= 	$request['control_id'];
+		$control 				= 	DetalleControl::where('id','=',$detalle_control_id)->first();
+
+		$control->activo = 0;
+		$control->fecha_mod = $this->fechaactual;
+		$control->usuario_mod = Session::get('usuario')->id;
+		$control->save();
+
+		$listadetalledoc 		= 	DetalleControl::where('control_id','=',$control_id)
+									->where('tipo','=','DOC')->where('activo','=','1')->get();
+		
+		return View::make('atenderpaciente/ajax/alistadocumentos',
+						 [				 	
+						 	'listadetalledoc' 		=> $listadetalledoc,
+						 	'ajax' 					=> true,					 	
+						 ]);
+
+
+	}
+
+
 
 
 	public function actionPopUpDetalleControl($idcontrol,Request $request)
@@ -633,7 +674,9 @@ class RegistroPacienteController extends Controller
 
 		$paciente 			= 	Paciente::where('dni','=',$dni)->first();
 		$listacontroles 	= 	Control::where('paciente_id','=',$paciente->id)
-									->orderby('fecha','desc')->get();
+								->orderby('fecha','desc')
+								->where('activo','=',1)
+								->get();
 		$funcion 			= 	$this;
 
 
