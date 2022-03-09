@@ -499,8 +499,8 @@ class RegistroPacienteController extends Controller
 		$control = new DetalleControl;
 		$control->id = $idcontrol;
 
-		$control->codigocie = $codigocie;
-		$control->descripcion = strtoupper($descripcion);
+		$control->codigocie = strtoupper($codigocie);
+		$control->descripcion = $descripcion;
 		$control->tipo = 'CIE';
 		$control->control_id = $control_id;
 		$control->fecha_crea = $this->fechaactual;
