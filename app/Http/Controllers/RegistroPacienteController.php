@@ -205,6 +205,7 @@ class RegistroPacienteController extends Controller
 					//ya exite controles para este paciente el dia de hoy
 					$control    = Control::where('paciente_id','=',$cabecera->id)
 								  ->where('doctor_id','=',$doctor_id)
+								  ->where('activo','=',1)
 								  ->where('fecha','=',$this->fecha_sin_hora)->first();
 
 					if(count($control)>0){

@@ -247,9 +247,9 @@
 
 <div class="row xs-pt-15">
   <div class="col-xs-6">
-      <div class="be-checkbox">
-
-      </div>
+    <p class="text-left">
+<!--       <button type="button" class="btn btn-space btn-success modificar_datos">Modificar datos </button> -->
+    </p>
   </div>
   <div class="col-xs-12">
     <p class="text-right">
