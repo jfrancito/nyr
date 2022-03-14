@@ -674,6 +674,8 @@ class RegistroPacienteController extends Controller
 		$dni 				= 	trim($request['dni']);
 
 		$paciente 			= 	Paciente::where('dni','=',$dni)->first();
+
+
 		$listacontroles 	= 	Control::where('paciente_id','=',$paciente->id)
 								->orderby('fecha','desc')
 								->where('activo','=',1)

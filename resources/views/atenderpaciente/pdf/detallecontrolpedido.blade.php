@@ -79,7 +79,7 @@
 
 			    <div class="det1">
 	   				<p>
-	   					Descripcion : {{$control->anamnesis}}
+						<?php echo nl2br($control->anamnesis); ?>
 	   				</p>  		    	
 			    </div>
 			    <div style="font-size: 0.9em;margin-top: 20px;">
@@ -103,7 +103,7 @@
 
 			    <div class="det1">
 	   				<p>
-	   					Descripcion : {{$control->examen_fisico}}
+	   					<?php echo nl2br($control->examen_fisico); ?>
 	   				</p>  		    	
 			    </div>
 
@@ -113,7 +113,7 @@
 
 			    <div class="det1">
 	   				<p>
-	   					Descripcion : {{$control->plan_trabajo}}
+	   					<?php echo nl2br($control->plan_trabajo); ?>
 	   				</p>  		    	
 			    </div>
 
@@ -142,7 +142,7 @@
 
 			    <div class="det1">
 	   				<p>
-	   					Descripcion : {{$control->tratamiento}}
+	   					<?php echo nl2br($control->tratamiento); ?>
 	   				</p>  		    	
 			    </div>
 

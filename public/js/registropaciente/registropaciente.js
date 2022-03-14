@@ -91,6 +91,26 @@ $(document).ready(function(){
     });
 
 
+    $(".buscarpacientetop").on('click','.buscarpaciente', function() {
+
+        event.preventDefault();
+        var dni        =   $('#dni_b').val();
+        var idopcion    =   $('#idopcion').val();
+        var _token      =   $('#token').val();
+
+        //validacioones
+        if(dni ==''){ alerterrorajax("Ingrese un dni."); return false;}
+
+        data            =   {
+                                _token      : _token,
+                                dni         : dni,
+                                idopcion    : idopcion,
+                            };
+        ajax_normal(data,"/ajax-buscar-paciente-xdni");
+
+    });
+
+
     $(".registropaciente").on('click','.buscarlistaatencion', function() {
 
         event.preventDefault();
