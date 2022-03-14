@@ -692,6 +692,50 @@ class RegistroPacienteController extends Controller
 
 	}
 
+	public function actionAjaxModificarPaciente(Request $request) {
+
+
+		$dni 				= 	$request['dni'];
+		$nombres 			= 	$request['nombres'];
+		$apellido_paterno 	= 	$request['apellido_paterno'];
+		$apellido_materno 	= 	$request['apellido_materno'];
+		$telefono 			= 	$request['telefono'];
+		$sexo 				= 	$request['sexo'];
+		$fecha_nacimiento 	= 	$request['fecha_nacimiento'];
+		$direccion 			= 	$request['direccion'];
+
+
+		$paciente 			= 	Paciente::where('dni','=',$dni)->first();
+
+		$paciente->nombres  		= $nombres;
+		$paciente->apellido_paterno = $apellido_paterno;
+		$paciente->apellido_materno = $apellido_materno;
+		$paciente->sexo 			= $sexo;
+		$paciente->fecha_nacimiento = $fecha_nacimiento;
+		$paciente->telefono 		= $telefono;
+		$paciente->direccion 		= $direccion;
+		$paciente->fecha_mod 		= $this->fechaactual;
+		$paciente->usuario_mod 		= Session::get('usuario')->id;
+		$paciente->save();
+
+
+	}
+
+
+	public function actionAjaxEliminarControl(Request $request) {
+
+
+		$control_id 		= 	$request['control_id'];
+		$control 			= 	Control::where('id','=',$control_id)->first();
+		$control->fecha_mod = $this->fechaactual;
+		$control->usuario_mod = Session::get('usuario')->id;
+		$control->activo 	= 0;
+		$control->save();
+
+	}
+
+
+
 
 
 }

@@ -252,9 +252,18 @@
     </p>
   </div>
   <div class="col-xs-12">
+  <div class="col-xs-6">
+    <p class="text-left">
+      <button type="button" class="btn btn-space btn-success modificar_datos">Modificar datos </button>
+    </p>
+  </div>
+
+  <div class="col-xs-6">
     <p class="text-right">
       <button type="submit" class="btn btn-space btn-primary">Registrar consulta </button>
     </p>
+  </div>
+
   </div>
 </div>
 

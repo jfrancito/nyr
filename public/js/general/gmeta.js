@@ -109,6 +109,25 @@ function ajax_normal_form(data,link) {
     });
 }
 
+function ajax_normal_form_alert(data,link,mensaje,click) {
+    abrircargando();
+    $.ajax({
+        type    :   "POST",
+        url     :   carpeta+link,
+        data    :   data,
+        success: function (data) {
+            cerrarcargando();
+            alertajax(mensaje);
+             $( "."+click).click();
+        },
+        error: function (data) {
+            cerrarcargando();
+            error500(data);
+        }
+    });
+}
+
+
 function ajax_normal_guardar_lista(data,link,btnclick) {
 
     abrircargando();

@@ -2,22 +2,71 @@ $(document).ready(function(){
 
     var carpeta = $("#carpeta").val();
 
-    $(".buscarpacientetop").on('click','.buscarpaciente', function() {
+
+    $(".registropaciente").on('click','.eliminarmodalcontrol', function() {
+
+        var control_id              =   $(this).attr('data_control_id');
+        var nombre_id               =   $(this).attr('data_nombre_id');
+        var _token                  =   $('#token').val();        
+
+        if (confirm("!Desea eliminar el control del paciente  "+nombre_id) == true) {
+
+            data            =   {
+                                    _token      : _token,
+                                    control_id  : control_id,
+                                };
+
+            mensaje         =   "Control del aciente "+nombre_id+" eliminado exitoso";
+
+            click           =   'buscarlistaatencion';
+            ajax_normal_form_alert(data,"/ajax-eliminar-control",mensaje,click);
+           
+        }
+
+
+    });
+
+    $(".registropaciente").on('click','.modificar_datos', function() {
 
         event.preventDefault();
-        var dni        =   $('#dni_b').val();
-        var idopcion    =   $('#idopcion').val();
-        var _token      =   $('#token').val();
-
+        var dni                     =   $('#dni').val();
+        var nombres                 =   $('#nombres').val();
+        var apellido_paterno        =   $('#apellido_paterno').val();
+        var apellido_materno        =   $('#apellido_materno').val();
+        var direccion               =   $('#direccion').val();
+        var telefono                =   $('#telefono').val();
+        var direccion               =   $('#direccion').val();
+        var sexo                    =   $('#sexo').val();
+        var fecha_nacimiento        =   $('#fecha_nacimiento').val();
+        var ind_paciente            =   $('#ind_paciente').val();
+        var _token                  =   $('#token').val();
         //validacioones
+        if(ind_paciente =='0'){ alerterrorajax("Buscar paciente."); return false;}
         if(dni ==''){ alerterrorajax("Ingrese un dni."); return false;}
+        if(nombres ==''){ alerterrorajax("Ingrese un nombres."); return false;}
+        if(apellido_paterno ==''){ alerterrorajax("Ingrese un apelido paterno."); return false;}
+        if(apellido_materno ==''){ alerterrorajax("Ingrese un apellido materno."); return false;}
+        if(telefono ==''){ alerterrorajax("Ingrese un telefono."); return false;}
+        if(sexo ==''){ alerterrorajax("Selecciona un sexo."); return false;}
+        if(fecha_nacimiento ==''){ alerterrorajax("Ingrese una fecha nacimiento."); return false;}
 
         data            =   {
                                 _token      : _token,
                                 dni         : dni,
-                                idopcion    : idopcion,
+                                nombres     : nombres,
+                                apellido_paterno : apellido_paterno,
+                                apellido_materno : apellido_materno,
+                                direccion        : direccion,
+                                telefono         : telefono,
+                                sexo             : sexo,
+                                direccion        : direccion,
+                                fecha_nacimiento : fecha_nacimiento,
                             };
-        ajax_normal(data,"/ajax-buscar-paciente-xdni");
+
+
+        mensaje         =   "Paciente "+nombres +" "+ apellido_paterno +" "+ apellido_materno+" modificado exitoso";
+        click           =   'buscarlistaatencion';
+        ajax_normal_form_alert(data,"/ajax-eliminar-control",mensaje,click);
 
     });
 

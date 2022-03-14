@@ -67,6 +67,10 @@ Route::group(['middleware' => ['authaw']], function () {
 
 	Route::any('/gestion-de-buscar-paciente/{idopcion}', 'RegistroPacienteController@actionBuscarPaciente');
 	Route::any('/ajax-buscar-paciente-xdni', 'RegistroPacienteController@actionAjaxBuscarPacienteXDni');
+	Route::any('/ajax-modificar-paciente', 'RegistroPacienteController@actionAjaxModificarPaciente');
+	Route::any('/ajax-eliminar-control', 'RegistroPacienteController@actionAjaxEliminarControl');
+
+
 
 
 
